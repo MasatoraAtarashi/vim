@@ -46,6 +46,7 @@ NeoBundle 'tpope/vim-endwise'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neocomplcache-rsense'
 let g:acp_enableAtStartup = 0
 " Use neocomplcache.
 let g:neocomplcache_enable_at_startup = 1
@@ -81,3 +82,13 @@ inoremap <expr><C-e>  neocomplcache#cancel_popup()
 call neobundle#end()
 NeoBundleCheck
 filetype plugin indent on
+
+if !exists('g:neocomplcache_omni_patterns')
+    let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+
+"rsenseのインストールフォルダがデフォルトと異なるので設定
+let g:rsenseHome = expand("/Users/MasatoraAtarashi/.rbenv/shims/rsense")
+let g:rsenseUseOmniFunc = 1
